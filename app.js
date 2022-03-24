@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const adminLink = require('./model/adminLinkModel')
 const userLink = require('./model/userLinkModel')
 const userModel = require('./model/userModel')
-const sendMail = require('./modules/sendMail')
 const apiLinkModel = require('./model/apiCallBackLink')
 const axios = require('axios')
 
