@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const adminLink = require('./model/adminLinkModel')
 const userLink = require('./model/userLinkModel')
 const userModel = require('./model/userModel')
-const sendMail = require('./modules/sendMail')
 const apiLinkModel = require('./model/apiCallBackLink')
 const axios = require('axios')
 
@@ -96,7 +95,7 @@ bot.command('check',async (ctx)=>{
                     
                         await page.goto(url ,{waitUntil: 'networkidle2'})
                     
-                        const html = await page.$$eval('body>div', (div)=>div.map((text)=>text.textContent))
+                        const html = await page.$eval('*', (el)=>el.innerText)
                     
                         const data = html.toString()
             
@@ -139,7 +138,6 @@ bot.command('check',async (ctx)=>{
                                             axios
                                                 .get(link+user_mail)
                                                 .then(res => {
-                                                    console.log(res)
 
                                                     const data = new userLink({
                                                         userId: ctx.from.id,
