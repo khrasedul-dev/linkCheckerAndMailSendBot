@@ -101,6 +101,7 @@ bot.command('check',async (ctx)=>{
                         const html = await page.$eval('*', (el)=>el.innerText)
                     
                         const data = html.toString()
+			await browser.close()
             
                         return data
                     }
