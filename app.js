@@ -86,7 +86,8 @@ bot.command('check',async (ctx)=>{
                     async function checkLink(url){
                         const browser = await puppeteer.launch({
                             args: [
-                                '--no-sandbox'
+                                '--no-sandbox',
+                                '--disable-setuid-sandbox'
                               ],
                             headless: true
                         })
