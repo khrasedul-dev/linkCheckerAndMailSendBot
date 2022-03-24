@@ -138,8 +138,7 @@ bot.command('check',async (ctx)=>{
                                             axios
                                                 .get(link+user_mail)
                                                 .then(res => {
-                                                    console.log(res)
-
+                                                
                                                     const data = new userLink({
                                                         userId: ctx.from.id,
                                                         userName: ctx.from.username,
