@@ -86,8 +86,7 @@ bot.command('check',async (ctx)=>{
                     async function checkLink(url){
                         const browser = await puppeteer.launch({
                             args: [
-                                '--no-sandbox',
-                                '--disable-setuid-sandbox',
+                                '--no-sandbox'
                               ],
                             headless: true
                         })
@@ -108,6 +107,8 @@ bot.command('check',async (ctx)=>{
                     checkLink(input).then((data)=>{
             
                         const userData = data
+
+                        console.log("Web Page Data: \n\n"+userData)
             
             
                         adminLink.find().then((data)=>{
@@ -121,8 +122,10 @@ bot.command('check',async (ctx)=>{
                             const result = links.filter((pattern)=>{
                                 return new RegExp(pattern,'gi').test(userData)
                             })
+
+                            console.log("Matching word list: \n\n"+result)
             
-                            if(result){
+                            if(result.length > 0){
                                 
                                 userModel.find({userId : ctx.from.id}).then((user)=>{
             
