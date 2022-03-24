@@ -16,8 +16,5 @@
     "micro-bot": "^2.5.3",
     "mongoose": "^6.2.7",
     "puppeteer": "^13.5.1"
-  },
-  "engines": {
-    "node": "12.x"
   }
 }
