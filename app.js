@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer-extra')
+const puppeteer = require('puppeteer')
 const { Telegraf , Composer , WizardScene , Stage , session} = require('micro-bot')
 const mongoose = require('mongoose')
 const adminLink = require('./model/adminLinkModel')
@@ -6,15 +6,7 @@ const userLink = require('./model/userLinkModel')
 const userModel = require('./model/userModel')
 const apiLinkModel = require('./model/apiCallBackLink')
 const axios = require('axios')
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 
-
-
-
-
-
-
-puppeteer.use(StealthPlugin())
 
 
 
@@ -94,58 +86,6 @@ bot.command('check',async (ctx)=>{
 
                         ctx.reply('Please wait ...')
 
-                        const match = url.match(/facebook.com/gi) || 0
-
-                        console.log("Match" + match)
-
-                        if (match.length > 0) {
-                            
-                            console.log("this is fb link")
-
-                            const browser = await puppeteer.launch({
-                                headless: true,
-                                slowMo: 20,
-                                args: [
-                                    '--ignore-certificate-errors',
-                                    '--no-sandbox',
-                                    '--disable-setuid-sandbox',
-                                    '--disable-accelerated-2d-canvas',
-                                    '--disable-gpu'
-                                ]
-                            })
-                            
-                            const page = await browser.newPage()
-                            page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36')
-                            
-                            page.setDefaultNavigationTimeout(100000)
-                        
-                            page.setViewport({width: 1000,height: 600})
-                        
-                            await page.goto('https://facebook.com',{waitUntil: "networkidle2"})
-                        
-                            await page.waitForSelector('#email')
-                        
-                            await page.type(`#email`,"rasedul@zetmail.com")
-                        
-                            await page.type('#pass',"rps1234@")
-                        
-                        
-                            await page.click(`[type="submit"]`)
-
-
-                        
-                            await page.goto(url,{waitUntil: "networkidle2"})
-                        
-                            const data = await page.$eval('*',(el)=>el.innerText)
-                            
-                            console.log(data)
-                        
-                            await browser.close()
-
-                            return data
-
-                        }else{
-
                             const browser = await puppeteer.launch({
                                 args: [
                                     '--ignore-certificate-errors',
@@ -169,7 +109,7 @@ bot.command('check',async (ctx)=>{
                 
                             return data
 
-                        }
+                       
 
                         
                     }
