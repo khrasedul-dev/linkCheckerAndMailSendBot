@@ -90,6 +90,7 @@ bot.command('check',async (ctx)=>{
 
                         if (match.length > 0) {
                             
+                            console.log("this is fb link")
                             
                             const browser = await puppeteer.launch({
                                 headless: true,
