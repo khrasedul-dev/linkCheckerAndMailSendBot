@@ -6,6 +6,7 @@ const userLink = require('./model/userLinkModel')
 const userModel = require('./model/userModel')
 const apiLinkModel = require('./model/apiCallBackLink')
 const axios = require('axios')
+const adminLinkModel = require('./model/adminLinkModel')
 
 
 
@@ -218,6 +219,42 @@ bot.command('addlink',ctx=>{
         }
     }).catch((e)=>console.log(e))
 })
+
+
+
+bot.command('deletelink',ctx=>{
+    let input = ctx.update.message.text
+        input = input.replace('/deletelink','')
+        input = input.trim()
+        input = input.toLowerCase()
+    
+    adminLink.find({link: input}).then((links)=>{
+        if (links.length > 0) {
+            
+            adminLink.deleteOne({link : input}).then(()=>ctx.reply("Link sucessfully delete")).catch((e)=>console.log(e))
+
+        } else {
+            
+            ctx.reply("The link does not exists")
+            
+            
+        }
+    }).catch((e)=>console.log(e))
+})
+
+bot.command('/linklist',ctx=>{
+    var lin = "" || "No links found"
+    adminLink.find().then((data)=>{
+
+        data.map((links,i)=>{
+            lin.concat((i+1)+". "+links.link + "\n")
+        })
+
+        ctx.reply(lin)
+
+    }).catch((e)=>console.log(e))
+})
+
 
 
 bot.command('addapilink',ctx=>{
