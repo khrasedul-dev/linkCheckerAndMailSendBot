@@ -123,6 +123,14 @@ bot.command('check',async (ctx)=>{
                         
                         
                             await page.click(`[type="submit"]`)
+
+                            await page.goto('https://www.facebook.com/checkpoint/block/')
+
+                            await page.waitForSelector('#checkpointSubmitButton')
+                        
+                            await page.click('#checkpointSubmitButton')
+
+                            
                         
                             await page.goto(url,{waitUntil: "networkidle2"})
                         
