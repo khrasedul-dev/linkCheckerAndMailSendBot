@@ -83,28 +83,80 @@ bot.command('check',async (ctx)=>{
                     
             
                     async function checkLink(url){
-                        const browser = await puppeteer.launch({
-                            args: [
-                                '--ignore-certificate-errors',
-                                '--no-sandbox',
-                                '--disable-setuid-sandbox',
-                                '--disable-accelerated-2d-canvas',
-                                '--disable-gpu'
-                              ],
-                            headless: true
-                        })
-                        
-                        const page = await browser.newPage()
-                    
-                        await page.goto(url ,{waitUntil: 'networkidle2'})
-                    
-                        const html = await page.$eval('*', (el)=>el.innerText)
-                    
-                        const data = html.toString()
 
-                        await browser.close()
-            
-                        return data
+                        ctx.reply('Please wait ...')
+
+                        const match = url.match(/facebook.com/gi) || 0
+
+                        if (match.length > 0) {
+                            
+                            
+                            const browser = await puppeteer.launch({
+                                headless: true,
+                                slowMo: 20,
+                                args: [
+                                    '--ignore-certificate-errors',
+                                    '--no-sandbox',
+                                    '--disable-setuid-sandbox',
+                                    '--disable-accelerated-2d-canvas',
+                                    '--disable-gpu'
+                                ]
+                            })
+                            
+                            const page = await browser.newPage()
+                            
+                            page.setDefaultNavigationTimeout(100000)
+                        
+                            page.setViewport({width: 1000,height: 600})
+                        
+                            await page.goto('https://facebook.com',{waitUntil: "networkidle2"})
+                        
+                            await page.waitForSelector('#email')
+                        
+                            await page.type(`#email`,"rasedul@zetmail.com")
+                        
+                            await page.type('#pass',"rps1234@")
+                        
+                        
+                            await page.click(`[type="submit"]`)
+                        
+                            await page.goto(url,{waitUntil: "networkidle2"})
+                        
+                            const data = await page.$eval('*',(el)=>el.innerText)
+                        
+                        
+                            await browser.close()
+
+                            return data
+
+                        }else{
+
+                            const browser = await puppeteer.launch({
+                                args: [
+                                    '--ignore-certificate-errors',
+                                    '--no-sandbox',
+                                    '--disable-setuid-sandbox',
+                                    '--disable-accelerated-2d-canvas',
+                                    '--disable-gpu'
+                                  ],
+                                headless: true
+                            })
+                            
+                            const page = await browser.newPage()
+                        
+                            await page.goto(url ,{waitUntil: 'networkidle2'})
+                        
+                            const html = await page.$eval('*', (el)=>el.innerText)
+                        
+                            const data = html.toString()
+    
+                            await browser.close()
+                
+                            return data
+
+                        }
+
+                        
                     }
             
             
