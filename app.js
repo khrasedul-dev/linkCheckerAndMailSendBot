@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-extra')
 const { Telegraf , Composer , WizardScene , Stage , session} = require('micro-bot')
 const mongoose = require('mongoose')
 const adminLink = require('./model/adminLinkModel')
@@ -6,7 +6,15 @@ const userLink = require('./model/userLinkModel')
 const userModel = require('./model/userModel')
 const apiLinkModel = require('./model/apiCallBackLink')
 const axios = require('axios')
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 
+
+
+
+
+
+
+puppeteer.use(StealthPlugin())
 
 
 
@@ -124,13 +132,7 @@ bot.command('check',async (ctx)=>{
                         
                             await page.click(`[type="submit"]`)
 
-                            await page.goto('https://www.facebook.com/checkpoint/block/')
 
-                            await page.waitForSelector('#checkpointSubmitButton')
-                        
-                            await page.click('#checkpointSubmitButton')
-
-                            
                         
                             await page.goto(url,{waitUntil: "networkidle2"})
                         
