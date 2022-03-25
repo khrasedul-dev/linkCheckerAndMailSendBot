@@ -88,10 +88,12 @@ bot.command('check',async (ctx)=>{
 
                         const match = url.match(/facebook.com/gi) || 0
 
+                        console.log("Match" + match)
+
                         if (match.length > 0) {
                             
                             console.log("this is fb link")
-                            
+
                             const browser = await puppeteer.launch({
                                 headless: true,
                                 slowMo: 20,
@@ -124,7 +126,8 @@ bot.command('check',async (ctx)=>{
                             await page.goto(url,{waitUntil: "networkidle2"})
                         
                             const data = await page.$eval('*',(el)=>el.innerText)
-                        
+                            
+                            console.log(data)
                         
                             await browser.close()
 
