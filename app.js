@@ -113,7 +113,7 @@ bot.command('check',async (ctx)=>{
                             return data
 
                        }catch(e){
-				ctx.reply("You link is invalid \n\nPlease try again")
+				ctx.reply("Please try again")
 			}
 
                         
