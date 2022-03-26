@@ -85,7 +85,9 @@ bot.command('check',async (ctx)=>{
             
                     async function checkLink(url){
 
-                        ctx.reply('Please wait ...')
+                        try{
+
+			ctx.reply('Please wait ...')
 
                             const browser = await puppeteer.launch({
                                 args: [
@@ -110,7 +112,9 @@ bot.command('check',async (ctx)=>{
                 
                             return data
 
-                       
+                       }catch(e){
+				ctx.reply("You link is invalid \n\nPlease try again")
+			}
 
                         
                     }
