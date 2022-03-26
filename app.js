@@ -243,7 +243,7 @@ bot.command('deletelink',ctx=>{
 })
 
 bot.command('/linklist',ctx=>{
-    var lin = "" || "No links found"
+    var lin = ""
     adminLink.find().then((data)=>{
 
         data.map((links,i)=>{
