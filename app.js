@@ -250,7 +250,7 @@ bot.command('/linklist',ctx=>{
             lin.concat((i+1)+". "+links.link + "\n")
         })
 
-        ctx.reply(lin)
+        ctx.reply(lin || " 0")
 
     }).catch((e)=>console.log(e))
 })
