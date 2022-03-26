@@ -242,22 +242,6 @@ bot.command('deletelink',ctx=>{
     }).catch((e)=>console.log(e))
 })
 
-bot.command('/linklist',ctx=>{
-    
-    adminLink.find().then((data)=>{
-        
-        console.log(data)
-        
-        let lin = ""
-        
-        data.map((links,i)=>{
-            lin.concat((i+1)+". "+links.link + "\n")
-        })
-
-        ctx.reply(lin).catch((e)=>ctx.reply("Something is wrong")
-
-    }).catch((e)=>console.log(e))
-})
 
 
 
