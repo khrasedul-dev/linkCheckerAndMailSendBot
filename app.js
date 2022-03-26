@@ -246,6 +246,8 @@ bot.command('/linklist',ctx=>{
     
     adminLink.find().then((data)=>{
         
+        console.log(data)
+        
         let lin = ""
         
         data.map((links,i)=>{
