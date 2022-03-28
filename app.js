@@ -226,6 +226,25 @@ bot.command('addlink',ctx=>{
 
 
 
+bot.command('linklist',ctx=>{
+    adminLink.find().then((links)=>{
+        
+        
+
+        const data = links.map((link,i)=>{
+            return  (i+1) + ". " +link.link
+        })
+
+        const dataforprint = data.join(' \n ')
+
+        ctx.telegram.sendMessage(ctx.chat.id , dataforprint).catch((e)=>console.log(e))
+
+    }).catch((e)=>console.log(e))
+})
+
+
+
+
 bot.command('deletelink',ctx=>{
     let input = ctx.update.message.text
         input = input.replace('/deletelink','')
@@ -372,7 +391,7 @@ bot.hears('💌 My Mail',ctx=>{
         } else {
            ctx.reply('Please join first') 
         }
-    }).catch((r)=>console.log(e))
+    }).catch((e)=>console.log(e))
 })
 
 bot.hears('📧 Change Mail',Stage.enter('user_input'))
